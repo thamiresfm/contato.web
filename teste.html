@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <script src="https://smtpjs.com/v2/smtp.js"></script>
+
+
+
+
+
+        <script>
+
+            var nome ="thamires";
+            var email ="contato.web.hj@gmail.com";
+            var assunto ="teste2";
+            var servidor = "Smtp.gmail.com";
+            var emailFrom = "contato.web.hj@gmail.com";
+            var senha =  "contato1234";
+            var loginServidor = "contato.web.hj@gmail.com";
+
+            Email.send(emailFrom,
+                        email,
+                        nome,
+                        assunto,
+                        servidor,
+                        loginServidor,
+                        senha,
+                        {token: "63cb3a19-2684-44fa-b76f-debf422d8b00"});
+            
+        </script>
+    </head>
+    <body>
+    
+    </body>
+</html>
