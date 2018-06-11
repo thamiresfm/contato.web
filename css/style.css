@@ -4,3 +4,17 @@ padding: 4% 20%;
 h1{
     text-align: center;
 }
+#aguarde{
+
+    padding: 2%;
+
+    display: none;
+    color:red;
+
+    }
+#sucesso{
+    padding: 2%;
+    color:red;
+    display: none;
+
+}

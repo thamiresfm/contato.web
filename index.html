@@ -33,6 +33,9 @@
                         <textarea name="mensagem" id="mensagem" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
                 <button id="submit" class="btn btn-primary">Enviar</button>
+
+                <div id="aguarde">Aguarde enviando e-mail...</div>
+                <div id="sucesso">E-mail enviado com sucesso!</div>
         </form>
 </body>
 <script src="https://smtpjs.com/v2/smtp.js"></script>
@@ -42,24 +45,25 @@
 
         // Informações fixas
         var servidor = "smtp.gmail.com";
-        var emailFrom = "contato.web.hj@gmail.com";
+        var emailPara = "contato.web.hj@gmail.com";
         var senha = "contato1234";
         var loginServidor = "contato.web.hj@gmail.com";
         var submit = document.querySelector("#submit");
         var campo = document.querySelector(".form-control");
-        
+        var aguarde = document.querySelector("#aguarde");
+        var sucesso = document.querySelector("#sucesso");
 
         function validaCampo(e){
                  // Previne a página de recarregar
                  e.preventDefault();
                 var nome = document.querySelector("#nome").value;
-                var email = document.querySelector("#email").value;
+                var emailDe  = document.querySelector("#email").value;
                 var assunto = document.querySelector("#assunto").value;
                 var mensagem = document.querySelector("#mensagem").value;
 
 
 
-                if(nome == '' || email == '' || assunto  == ''|| mensagem == ''){
+                if(nome == '' || emailDe == '' || assunto  == ''|| mensagem == ''){
                         // Alert caso o campo esteja vazio
                         alert("Campo precisar ser preenchido!");
                         
@@ -78,16 +82,23 @@
                 e.preventDefault();
                 // Pega os campos dos formularios
                 var nome = document.querySelector("#nome").value;
-                var email = document.querySelector("#email").value;
+                var emailDe = document.querySelector("#email").value;
                 var assunto = document.querySelector("#assunto").value;
-                var mensagem = document.querySelector("#mensagem").value;
+                var mensagem = " Email De: "+ emailDe +" <br>"+  "Assunto: "+ assunto  +" <br>"+ " Mensagem: "+  document.querySelector("#mensagem").value ;
+                
                 // Log da função
                 console.log("Enviando e-mail...");
+                sucesso.style.display = "none";
+                aguarde.style.display = "block";
+
+
                 // Envia o e-mail
-                Email.send(email,emailFrom,assunto, mensagem, servidor, loginServidor, senha,
+                Email.send(emailDe,emailPara,assunto, mensagem, servidor, loginServidor, senha,
                         function pronto(mensagem) {
                                 // Alerta de sucesso
-                                alert("E-mail enviado com sucesso!!");
+                                // alert("E-mail enviado com sucesso!!");
+                                aguarde.style.display = "none";
+                                sucesso.style.display = "block";
                               
                                 
                                 // Limpa Campo 
@@ -95,6 +106,8 @@
                                 document.querySelector("#email").value = '';
                                 document.querySelector("#assunto").value = '';
                                 document.querySelector("#mensagem").value = '';
+
+                                 
 
                         }, erro => {
                                 // Alerta de erro
@@ -105,7 +118,7 @@
 
 
         // Eventos de validação
-        campo.addEventListener('blur', validaCampo);
+        // campo.addEventListener('blur', validaCampo);
         submit.addEventListener('click', validaCampo);
       
        
